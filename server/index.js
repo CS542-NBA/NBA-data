@@ -107,7 +107,7 @@ http.createServer(function(request,response){
           //myresult=result;
           //response.write(result);
           response.end(JSON.stringify(result));
-
+          console.log(result);
           //res.send(result.rows);
           //console.log(result.metaData); // [ { name: 'DEPARTMENT_ID' }, { name: 'DEPARTMENT_NAME' } ]
           //console.log(result.rows);     // [ [ 180, 'Construction' ] ]

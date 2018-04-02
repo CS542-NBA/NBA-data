@@ -22,12 +22,14 @@ function query1(){
 	    var xhr=new XMLHttpRequest();
 
 	    
-	    xhr.open("POST","http://localhost:5000/sendquery",true);
+	    xhr.open("POST","http://localhost:5000",true);
 	    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	    //console.log("hi");
 	    xhr.onreadystatechange=function(){
-	      if(xhr.readyState===4){
+	      if(xhr.readyState===4 ){
 	        //console.log(xhr.responseText);
 	       	str=str+xhr.responseText;
+	       	console.log("xhr:",xhr.responseText);
 	       	printxhr(str);
 	        //document.getElementById("viewSection").innerHTML=xhr.responseText;
 	        }
