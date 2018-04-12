@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:c="">
   <head>
     <meta charset="utf-8">
     <meta name="project" content="CS542">
@@ -10,12 +10,12 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
-
+    <link rel="stylesheet" herf="css/combo.select.css"/>
     <!-- Custom styles for this template -->
     <link href="css/main.css" rel="stylesheet">
     <!--<link href="css/icomoon.css" rel="stylesheet"> -->
     <link href="css/animate-custom.css" rel="stylesheet">
-
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
     
@@ -23,6 +23,8 @@
 	<script type="text/javascript" src="js/modernizr.custom.js"></script>
     <script type="text/javascript" src="./js/query1.js"></script>
     <script type="text/javascript" src="./js/openTeamDescription.js"></script>
+
+	<script type="text/javascript" src="js/jquery.combo.select.js"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
@@ -30,7 +32,7 @@
     <![endif]-->
   </head>
 
-  <body data-spy="scroll" data-offset="0" data-target="#navbar-main">
+  <body data-spy="scroll" data-offset="0" data-target="#navbar-main" onload="getAllPlayer()">
   
   	<div id="navbar-main">
       <!-- Fixed navbar -->
@@ -195,16 +197,29 @@
 						  <div class="form-group">
 						    <label for="text1" class="col-lg-4 control-label"></label>
 						    <div class="col-lg-10">
+
 						      <input type="text" class="form-control" id="text1" placeholder="NBA Player Name">
 						    </div>
 						  </div>
 						  <div class="form-group">
-						    <div class="col-lg-10">
-						      <button type="button" class="btn btn-success" onclick="query1();">Search</button>
+						    <div class="select-editable">
+						      <button type="button" id="btn" class="btn btn-success" >Search</button>
+							  <select id="list" class="js-example-basic-single" >
+
+							  </select>
+
 						    </div>
+
 						  </div>
+							<!--<select id="player" name="playerlist" onchange="javascript:getAllPlayer()">-->
+								<!--<option value="javascript:getAllPlayer()">inseart player name</option>-->
+								<!--<c:forEach items="javascript:getAllPlayer()" var="javascript:getAllPlayer()">-->
+									<!--<option value ="${javascript:getAllPlayer().data}">${javascript:getAllPlayer().data}</option>-->
+								<!--</c:forEach>-->
+							<!--</select>-->
 					   </form><!-- form -->
 					</p>
+
 				</div><!-- col -->
 			</div>
     <!-- Bootstrap core JavaScript
@@ -215,6 +230,9 @@
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/smoothscroll.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
+	<script src="js/openPlayerDescription.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
   </body>
 </html>
