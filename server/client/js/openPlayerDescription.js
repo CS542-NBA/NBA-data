@@ -2,6 +2,21 @@ $(document).ready(function() {
 	$('.js-example-basic-single').select2();
 });
 
+function openPlayerDescription(playerName){
+	//teamName="spur";
+	HTMLstring='<HTML>\n';
+	HTMLstring+='<HEAD>\n';
+	HTMLstring+='<TITLE>'+playerName+' Profile</TITLE>\n';
+	HTMLstring+='<h2 class="centered">'+playerName+'</h2>';
+	HTMLstring+='</HEAD>\n';
+	HTMLstring+='<body>\n';
+	HTMLstring+='</body>\n';
+	HTMLstring+='</HTML>';
+	newwindow=window.open();
+	newdocument=newwindow.document;
+	newdocument.write(HTMLstring);
+	newdocument.close();
+}
 //function conn(){
 //	var strConnString = "Provider=OraOLEDB.Oracle;" +
 //			"DataSource=(description=(address_list=(adress=(protocol=tcp)" +
@@ -80,32 +95,31 @@ $(document).ready(function() {
 //}
 //query1();
 
-//var oTxt = document.getElementById('text1');
-//var oBtn = document.getElementById('btn');
+var oTxt = document.getElementById('list');
+var oBtn = document.getElementById('btn');
 //var oList = document.getElementById('list');
-//
-////var fruits = getAllPlayer();
-//var fruits = ["gorgui","yogi","maurice","yoyo"];
-//
-//
-////点击事件
-////oTxt.addEventListener('input', function(e){
-////	if(e.keyCode == 13){
-////		var keyWord = oTxt.value;
-////		// var fruitList = searchByIndexOf(keyWord,fruits);
-////		var fruitList = searchByRegExp(keyWord, fruits);
-////		renderFruits(fruitList);
-////	}
-////}, false);
-//
-//oBtn.addEventListener('click', function(){
-//	var keyWord = oTxt.value;
-//	//var fruitList = searchByIndexOf(keyWord,fruits);
-//	console.log(fruitList);
-//	//var fruitList = searchByRegExp(keyWord, fruits);
-//	//renderFruits(fruitList);
-//
+
+
+
+//点击事件
+//oTxt.addEventListener('input', function(e){
+//	if(e.keyCode == 13){
+//		var keyWord = oTxt.value;
+//		// var fruitList = searchByIndexOf(keyWord,fruits);
+//		var fruitList = searchByRegExp(keyWord, fruits);
+//		renderFruits(fruitList);
+//	}
 //}, false);
+
+oBtn.addEventListener('click', function(){
+	var playerName = oTxt.value;
+
+	console.log(playerName);
+	openPlayerDescription(playerName);
+
+
+}, false);
+
 //
 ////回车查询
 //oTxt.oninput = function(){
@@ -119,66 +133,17 @@ $(document).ready(function() {
 //
 //}
 //
-//
-//function addOption(fruitList){
-//	var obj = document.getElementById(list);
-//	var len = fruitList.length;
-//	for (var i = 0; i < len; i++){
-//		obj.options[i] = new Option(fruitList[i],i)
-//	}
-//}
-////
-////function renderFruits(list){
-////	if(!(list instanceof Array)){
-////		return ;
-////	}
-////
-////	var len = list.length;
-////	console.log(len);
-////	var item = null;
-////	for(var i=0;i<len;i++){
-////		item = document.createElement('options');
-////		var index = i
-////		var options[index].value = list[i];
-////		oList.appendChild(item);
-////	}
-////}
-////模糊匹配的时候如果不区分大小写，可以使用toLowerCase()或者toUpperCase()转换之后去匹配。
-//
-////模糊查询1:利用字符串的indexOf方法
-//function searchByIndexOf(keyWord, list){
-//	if(!(list instanceof Array)){
-//		return ;
-//	}
-//	var len = list.length;
-//	var arr = [];
-//	for(var i=0;i<len;i++){
-//		//如果字符串中不包含目标字符会返回-1
-//		if(list[i].indexOf(keyWord)>=0){
-//			arr.push(list[i]);
-//		}
-//	}
-//	return arr;
-//}
-////正则匹配
-//function searchByRegExp(keyWord, list){
-//	if(!(list instanceof Array)){
-//		return ;
-//	}
-//	var len = list.length;
-//	var arr = [];
-//	var reg = new RegExp(keyWord);
-//	for(var i=0;i<len;i++){
-//		//如果字符串中不包含目标字符会返回-1
-//		if(list[i].match(reg)){
-//			arr.push(list[i]);
-//		}
-//	}
-//	return arr;
-//}
+fruitList = [{"id":"001","name":"test"},{"id":"002","name":"test2"}]
+function addOption(fruitList){
+	var obj = document.getElementById(list);
+	var len = fruitList.length;
+	for (var i = 0; i < len; i++){
+		obj.options.add(new Option(fruitList[i].id,fruitList[i].name));
+	}
+}
 
 
-
+addOption(fruitList);
 
 
 //$(document).ready(function(){
@@ -201,3 +166,4 @@ $(document).ready(function() {
 //	})
 //})
 
+$
