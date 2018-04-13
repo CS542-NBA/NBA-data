@@ -128,9 +128,6 @@ http.createServer(function(request,response){
   }
 
 
-  $(function){
-    $("#select").comboSelect();
-  }
   //response.end('myresult');
 }).listen(5000);
 
