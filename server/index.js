@@ -65,12 +65,13 @@ var http=require('http');
 http.createServer(function(request,response){
   var body='';
   request.on('data',function(data){
-    console.log(data)
-    body+=data;
+    console.log("data "+data); ////data is right
+    body+=data; //body+=data
+
   });
   request.on('end',function(){
     var post=qs.parse(body);
-    console.log(post);
+    console.log(post);//post is object
   });
   
   response.writeHead(200,{
