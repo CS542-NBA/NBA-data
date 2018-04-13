@@ -35,8 +35,7 @@ function query1(){
 	        }
 	       
 	    }    
-	    xhr.send('SELECT * FROM CONF');
-
+	    xhr.send('SELECT * FROM CONF'); 
 	    
     
 	}
