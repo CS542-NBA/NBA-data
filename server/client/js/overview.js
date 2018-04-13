@@ -29,6 +29,6 @@ document.getElementById("searchResult").innerHTML =x;
 }
 function executeSearch(){
  if(document.onkeydown.keyCode == 13){
-document.getElementById("searchResult").innerHTML ="1";
+searchPlayer();
 }
 }
