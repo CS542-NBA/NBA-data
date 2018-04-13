@@ -1,3 +1,6 @@
+$(document).ready(function() {
+	$('.js-example-basic-single').select2();
+});
 
 //function conn(){
 //	var strConnString = "Provider=OraOLEDB.Oracle;" +
@@ -26,56 +29,56 @@
 //
 //}
 //conn();
-function query1(){
-	var str="";
-	console.log("in query1");
-	function printxhr(data){
-		var jsonData=JSON.parse(data);
-		for(var i=0;i<jsonData.metaData.length;i++){
-			var metaD=jsonData.metaData[i];
-			console.log(metaD.name);
-		}
-		for(i=0;i<jsonData.rows.length;i++){
-			var row=jsonData.rows[i];
-			console.log(row);
-		}
-
-	}
-	function trySend(){
-		/*
-		 var callstate=function (value){
-		 this.setState({returnValue:value});
-		 }
-		 callstate=callstate.bind(this);
-		 */
-		console.log("in try send");
-		var xhr=new XMLHttpRequest();
-
-
-		xhr.open("POST","http://oracle.wpi.edu:1521",true);
-		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		xhr.send('SELECT * FROM CONF');
-		xhr.onreadystatechange=function(){
-			if(xhr.readyState===4 ){
-				//console.log(xhr.responseText);
-				str=str+xhr.responseText;
-				console.log("database connection successed!");
-				console.log("xhr:",xhr.responseText);
-				printxhr(str);
-				//document.getElementById("viewSection").innerHTML=xhr.responseText;
-			}
-
-		}
-
-
-
-
-
-	}
-	trySend();
-
-}
-query1();
+//function query1(){
+//	var str="";
+//	console.log("in query1");
+//	function printxhr(data){
+//		var jsonData=JSON.parse(data);
+//		for(var i=0;i<jsonData.metaData.length;i++){
+//			var metaD=jsonData.metaData[i];
+//			console.log(metaD.name);
+//		}
+//		for(i=0;i<jsonData.rows.length;i++){
+//			var row=jsonData.rows[i];
+//			console.log(row);
+//		}
+//
+//	}
+//	function trySend(){
+//		/*
+//		 var callstate=function (value){
+//		 this.setState({returnValue:value});
+//		 }
+//		 callstate=callstate.bind(this);
+//		 */
+//		console.log("in try send");
+//		var xhr=new XMLHttpRequest();
+//
+//
+//		xhr.open("POST","http://oracle.wpi.edu:1521",true);
+//		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+//		xhr.send('SELECT * FROM CONF');
+//		xhr.onreadystatechange=function(){
+//			if(xhr.readyState===4 ){
+//				//console.log(xhr.responseText);
+//				str=str+xhr.responseText;
+//				console.log("database connection successed!");
+//				console.log("xhr:",xhr.responseText);
+//				printxhr(str);
+//				//document.getElementById("viewSection").innerHTML=xhr.responseText;
+//			}
+//
+//		}
+//
+//
+//
+//
+//
+//}
+//trySend();
+//
+//}
+//query1();
 
 //var oTxt = document.getElementById('text1');
 //var oBtn = document.getElementById('btn');
@@ -178,27 +181,23 @@ query1();
 
 
 
-$(document).ready(function(){
-	var url = "http://localhost:8080/data.json";
-	$.ajax({
-		type:"get",
-		url: url,
-		success:function(userList){
-		var unitObj = document.getElementById("list");
-		if(userList!=null){
-			for(var i = 0; i <userList.length;i++){
-				unitObj.options.add(new Option(userList[i],userList[i].name));
-			}
-		}
-	},
-	error:function(){
-		console.log("get nba player list error");
-	}
+//$(document).ready(function(){
+//	var url = "http://localhost:8080/data.json";
+//	$.ajax({
+//		type:"get",
+//		url: url,
+//		success:function(userList){
+//		var unitObj = document.getElementById("list");
+//		if(userList!=null){
+//			for(var i = 0; i <userList.length;i++){
+//				unitObj.options.add(new Option(userList[i],userList[i].name));
+//			}
+//		}
+//	},
+//	error:function(){
+//		console.log("get nba player list error");
+//	}
+//
+//	})
+//})
 
-	})
-})
-
-$(document).ready(function(){
-	$('.js-example-basic-single').select2();
-}
-)
