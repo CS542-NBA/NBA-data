@@ -134,17 +134,23 @@ oBtn.addEventListener('click', function(){
 //}
 //
 fruitList = [{"id":"001","name":"test"},{"id":"002","name":"test2"}]
-function addOption(fruitList){
-	var obj = document.getElementById(list);
-	var len = fruitList.length;
-	for (var i = 0; i < len; i++){
-		obj.options.add(new Option(fruitList[i].id,fruitList[i].name));
-	}
-}
-
-
-addOption(fruitList);
-
+$.each(fruitList, function (i, item) {
+	$('#myselect').append($('<option>', {
+		value: item.name,
+		text : item.name
+	}));
+});
+//function addOption(fruitList){
+//	var obj = document.getElementById("myselect");
+//	console.log(obj);
+//	var len = fruitList.length;
+//	for (var i = 0; i < len; i++){
+//		obj.append($('<option>',{value:i,text:fruitList[i].name}));
+//	}
+//}
+//
+//
+//addOption(fruitList);
 
 //$(document).ready(function(){
 //	var url = "http://localhost:8080/data.json";
@@ -166,4 +172,3 @@ addOption(fruitList);
 //	})
 //})
 
-$
