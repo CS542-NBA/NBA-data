@@ -23,7 +23,9 @@
 	<script type="text/javascript" src="js/modernizr.custom.js"></script>
     <script type="text/javascript" src="./js/query1.js"></script>
     <script type="text/javascript" src="./js/openTeamDescription.js"></script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	  <script type="text/javascript" src="js/overview.js"></script>
+
+	  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
       <script src="assets/js/respond.min.js"></script>
@@ -44,10 +46,16 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#overview" class="smoothScroll">Overview</a></li>
-			<li> <a href="#team" class="smoothScroll"> Team</a></li>
-			<li> <a href="#player" class="smoothScroll"> Player</a></li>
-	
+            <li><a href="#team">Team</a></li>
+			<li> <a href="#PlayerSearch"> Search</a></li>
+			<li> <a href="#figure1" > Top 5 Score Player </a></li>
+			<li> <a href="#figure2" > Top 5 Assist</a></li>
+			<li> <a href="#figure3" > Top 5 Rebound </a></li>
+			<li> <a href="#figure4" > Top 5 Block</a></li>
+			<li> <a href="#figure5" > Top 5 Steal </a></li>
+			<li> <a href="#figure6" > Top 5 Score Teams</a></li>
+			<li> <a href="#figure7" > Top 5 Win/Loss Ratio </a></li>
+
         </div><!--/.nav-collapse -->
       </div>
     </div>
@@ -88,18 +96,13 @@
 						      </div><!-- /.modal-content -->
 						    </div><!-- /.modal-dialog -->
 						  </div><!-- /.modal -->
-			
-				
-				
-				<div class="container" id="contact" name="contact">
+
+<br>
+	<h1 class="centered" id="team">NBA Statistics and Data Visualization</h1><br>
+			<div class="container" id="team1" name="team1">
 			<div class="row">
-			<br>
-				<h1 class="centered">NBA Statistics and Data Visualization</h1>
-				<hr>
-				<br>
-				<br>
-				<div class="col-lg-4">
-					<h3>NBA TEAM</h3>
+				<div class="col-lg-4 callout">
+					<!--<h3>NBA TEAM</h3>-->
 					<p>	<span></span> <a href="#"> Atlanta Hawks</a> <br/>
 					<span></span> <a href="#"> Boston Celtics</a> <br/>
 					<span></span> <a href="#"> Brooklyn Nets</a> <br/>
@@ -110,27 +113,31 @@
 					<span></span> <a href="#"> Denver Nuggets</a> <br/>
 					<span></span> <a href="#"> Detroit Pistons</a> <br/>
 					<span></span> <a href="#"> Golden State Warriors</a> <br/>
+					</p>
+				</div><!-- col -->
+				
+			<!--<div class="container" id="team2" name="team2">
+			<div class="row">
+			    <br>
+				<br>-->
+
+				<div class="col-lg-4 callout">
+					<p>
 					<span></span> <a href="#"> Houston Rockets</a> <br/>
 					<span></span> <a href="#"> Indiana Pacers</a> <br/>
 					<span></span> <a href="#"> LA Clippers</a> <br/>
 					<span></span> <a href="#"> Los Angeles Lakers</a> <br/>
 					<span></span> <a href="#"> Memphis Grizzlies</a> <br/>
-	
-					</p>
-				</div><!-- col -->
-				
-			<div class="container" id="team" name="team">
-			<div class="row">
-			    <br>
-				<br>
-				<br>
-				<div class="col-lg-4">
-					<p>
-				<span></span> <a href="#"> Miami Heat</a> <br/>
+					<span></span> <a href="#"> Miami Heat</a> <br/>
 					<span></span> <a href="#"> Milwaukee Bucks</a> <br/>
 					<span></span> <a href="#"> Minnesota Timberwolves</a> <br/>
 					<span></span> <a href="#"> New Orleans Pelicans</a> <br/>
 					<span></span> <a href="#"> New York Knicks</a> <br/>
+					</p>
+				</div><!-- col -->
+
+				<div class="col-lg-4 callout">
+					<p>
 					<span></span> <a href="#"> Oklahoma City Thunder</a> <br/>
 					<span></span> <a href="#"> Orlando Magic</a> <br/>
 					<span></span> <a href="#"> Philadelphia 76ers</a> <br/>
@@ -144,18 +151,14 @@
 					</p>
 				</div><!-- col -->
 
-				<div class="col-lg-4">
-					<h3>Team member Search</h3>
-					<p>Input the name of team member</p>
+			<div class="container" id="PlayerSearch" name="PlayerSearch">
+				<div class="row">
+					<!--<p>Input the name of team member</p>-->
 					<p>
-
-
-					 <div class="dropdown">
+					<!-- <div class="dropdown">
 					  <button class="btn btn-default dropdown-toggle" id="menu1" data-toggle="dropdown">Select Team
 					  <span class="caret"></span></button>
 					  <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-						  <li><a href="#">jmeter</a></li>
-						  <li><a href="#">EJB</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Atlanta Hawks</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Boston Celtics</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Brooklyn Nets</a></li>
@@ -187,30 +190,126 @@
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Utah Jazz</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Washington Wizards</a></li>
 					  </ul>
-
-
   				</div>
-						<form class="form-horizontal" role="form">
-						 
-						  <div class="form-group">
-						    <label for="text1" class="col-lg-4 control-label"></label>
+  				-->
+
+					<form class="form-horizontal" role="form">
+					<div class="form-group">
+					 <label for="searchContent" class="col-lg-4 control-label"></label>
 						    <div class="col-lg-10">
-						      <input type="text" class="form-control" id="text1" placeholder="NBA Player Name">
+							<h3>Team member Search</h3>
+						      <input type="text" class="form-control" id="searchContent" placeholder="NBA Player Name" onkeydown="executeSearch()">
 						    </div>
-						  </div>
+							  </div>
 						  <div class="form-group">
 						    <div class="col-lg-10">
-						      <button type="button" class="btn btn-success" onclick="query1();">Search</button>
+						      <button type="button" class="btn btn-success" ONCLICK="searchPlayer()">Search</button>
 						    </div>
 						  </div>
 					   </form><!-- form -->
 					</p>
 				</div><!-- col -->
+				<div>
+					<p id="searchResult"></p>
+
+				</div>
 			</div>
+				<br>
+				<!-- ==== FIgures ==== -->
+				<div class="container" id="figure1" name="figure1">
+					<br>
+					<br>
+					<div class="row">
+						<h2 class="centered">TOP 5 SCORE PLAYERS</h2>
+						<hr>
+						<br>
+						<div class="col-lg-offset-2 col-lg-8">
+							<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+					</div><!-- col-lg -->
+					</div><!-- row -->
+				</div>
+
+				<div class="container" id="figure2" name="figure2">
+					<br>
+					<br>
+					<div class="row">
+						<h2 class="centered">TOP 5 ASSIST</h2>
+						<hr>
+						<br>
+						<div class="col-lg-offset-2 col-lg-8">
+							<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+					</div><!-- col-lg -->
+				</div><!-- row -->
+				</div>
+					<div class="container" id="figure3" name="figure3">
+							<br>
+							<br>
+							<div class="row">
+								<h2 class="centered">TOP 5 REBOUND</h2>
+								<hr>
+								<br>
+								<div class="col-lg-offset-2 col-lg-8">
+									<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+								</div><!-- col-lg -->
+					</div><!-- row -->
+					</div>
+					<div class="container" id="figure4" name="figure4">
+							<br>
+							<br>
+							<div class="row">
+								<h2 class="centered">TOP 5 BLOCK</h2>
+								<hr>
+								<br>
+								<div class="col-lg-offset-2 col-lg-8">
+									<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+							</div><!-- col-lg -->
+					</div><!-- row -->
+					</div>
+						<div class="container" id="figure5" name="figure5">
+							<br>
+							<br>
+							<div class="row">
+								<h2 class="centered">TOP 5 STEAL</h2>
+								<hr>
+								<br>
+								<div class="col-lg-offset-2 col-lg-8">
+									<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+								</div><!-- col-lg -->
+							</div><!-- row -->
+						</div>
+							<div class="container" id="figure6" name="figure6">
+								<br>
+								<br>
+								<div class="row">
+									<h2 class="centered">TOP 5 SCORE OF TEAMS</h2>
+									<hr>
+									<br>
+									<div class="col-lg-offset-2 col-lg-8">
+										<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+									</div><!-- col-lg -->
+								</div><!-- row -->
+							</div>
+							<div class="container" id="figure7" name="figure7">
+								<br>
+								<br>
+								<div class="row">
+									<h2 class="centered">TOP 5 WIN/LOSS RATIO</h2>
+									<hr>
+									<br>
+									<div class="col-lg-offset-2 col-lg-8">
+										<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+									</div><!-- col-lg -->
+							</div><!-- row -->
+							</div>
+				<br>
+				<br>
+
+
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-		      	
+	<script type="text/javascript" src="js/overview.js"></script>
 	<script type="text/javascript" src="js/retina.js"></script>
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/smoothscroll.js"></script>
