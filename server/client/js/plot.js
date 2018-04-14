@@ -14,7 +14,7 @@ function barplot(playerName, stat, div_id) {
     return Plotly.newPlot(div_id, data, layout)
 }
 
-function piechart(values, div) {
+function pieChart(id, values) {
     var data= [
         {
             values: values,
@@ -28,5 +28,5 @@ function piechart(values, div) {
         width: 500
     };
 
-    return  Plotly.newPlot(div, data, layout);
+    return  Plotly.newPlot(id, data, layout);
 }
