@@ -1,4 +1,6 @@
-function barplot(data, div_id='123', statName='Scores') {
+//statName='Scores'
+//e.g. data= [['player1', 'player2'], [20, 10]]
+function barPlot(data, div_id, statName) {
     var data = [
         {
             x: data[0],
@@ -9,14 +11,15 @@ function barplot(data, div_id='123', statName='Scores') {
             }
         }
     ];
+    var div_id;
     var title = 'NBA Top 5 ' + statName
     var layout = {title: title};
     return Plotly.newPlot(div_id, data, layout)
 }
 
 
-
-function pieChart(data=[60, 21], div_id='123', labels=['Win', 'Loss']) {
+//labels=['Win', 'Loss']
+function pieChart(data, div_id, labels) {
     var data= [
         {
             values: data,
@@ -24,6 +27,7 @@ function pieChart(data=[60, 21], div_id='123', labels=['Win', 'Loss']) {
             type: 'pie'
         }
     ];
+    var div_id;
 
     var layout = {
         height: 400,
@@ -32,14 +36,15 @@ function pieChart(data=[60, 21], div_id='123', labels=['Win', 'Loss']) {
 
     return  Plotly.newPlot(div_id, data, layout);
 }
-
-function radarChart(data=[0.5, 0.6, 0.5, 0.2, 0.3], div_id='123'){
+//e.g. data=[0.5, 0.6, 0.5, 0.2, 0.3]
+function radarChart(data, div_id){
     data = [{
         type: 'scatterpolar',
         r: data,
         theta: ['Scores', 'Rebound', 'Assist', 'Steal', 'Block'],
         fill: 'toself'
     }]
+  var div_id;
 
     var layout = {
         polar: {
