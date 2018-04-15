@@ -65,7 +65,7 @@ var http=require('http');
 http.createServer(function(request,response){
   var body='';
   request.on('data',function(data){
-    console.log("data "+data); ////data is right
+    console.log("data: "+data); ////data is right
     body+=data; //body+=data
 
   });

@@ -1,4 +1,4 @@
-import * from 'plot.js';
+
 /*
 function query1(){
 	var str="";
@@ -48,10 +48,26 @@ function parseJson(str){
 		
 	}
 	table.push(temp);
-	for(i=0;i<jsonData.rows.length;i++){
+	for(i=0;i<jsonData.rows.length-1;i++){
             table.push(jsonData.rows[i]);
             table[i+1][0]=table[i+1][0].replace(/\s+$/,'');
             table[i+1][1]=table[i+1][1].replace(/\s+$/,'');
+    }
+
+    console.log(table);
+	return table;
+}
+function parseAllNameJson(str){
+	var table=[];
+	var jsonData=JSON.parse(str);
+	var temp=[];
+	
+	for(i=0;i<jsonData.rows.length-1;i++){
+			tempname=jsonData.rows[i];
+			tempname=tempname[0].replace(/\s+$/,'');
+			tempdic={};
+			tempdic['name']=tempname;
+            table.push(tempdic);
     }
 
     console.log(table);
@@ -176,6 +192,34 @@ function query_arena(team){
        
     }
     var reqsend="";
+    console.log(reqsend);
+    xhr.send(reqsend); 
+}
+function query_allName(){
+	var str="";
+	var xhr=new XMLHttpRequest();
+    
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str=str+xhr.responseText;
+       	dbres=parseAllNameJson(str);
+       	console.log(dbres);
+       	$.each(dbres,function(i,item){
+       		$('#myselect').append($('<option>',{
+       			value:item.name,
+       			text:item.name
+       		}));
+       	});
+
+        //document.getElementById("viewSection").innerHTML=xhr.responseText;
+        }
+       
+    }
+    var reqsend="select player_name from players";
     console.log(reqsend);
     xhr.send(reqsend); 
 }
