@@ -21,7 +21,7 @@ function openPlayerDescription(playerName){
 //	var strConnString = "Provider=OraOLEDB.Oracle;" +
 //			"DataSource=(description=(address_list=(adress=(protocol=tcp)" +
 //			"(host=oracle.wpi.edu)(port=1521)))(connect_data=(server=dedicated)" +
-//			"(service_name=vcs)));user id = chsu;password=CHSU;plsqlrset=1"
+//			"(service_name=vcs)));user id = chsu;password=CHSU;plsqlrset=1";
 //	var conn = null;
 //	try{
 //		conn = new ActiveXObject("ADODB.Connection");
@@ -44,6 +44,29 @@ function openPlayerDescription(playerName){
 //
 //}
 //conn();
+
+var oracledb = require('oracledb');
+
+var oraConfig = require('./dbconfig.js');
+oracledb.getConnection(oraConfig, function(err, connection) {
+	if (err) {
+		console.log("Fail to connect oracle:", err);
+		return;
+	}
+
+	connection.setAutoCommit(true);
+	connection.execute("select player_name from players", [], function(err, result) {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		console.log(JSON.parse(result));
+		connection.close();
+
+	});
+});
+
+
 //function query1(){
 //	var str="";
 //	console.log("in query1");
@@ -70,7 +93,7 @@ function openPlayerDescription(playerName){
 //		var xhr=new XMLHttpRequest();
 //
 //
-//		xhr.open("POST","http://oracle.wpi.edu:1521",true);
+//		xhr.open("POST","localhost:5000",true);
 //		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 //		xhr.send('SELECT * FROM CONF');
 //		xhr.onreadystatechange=function(){
@@ -87,29 +110,16 @@ function openPlayerDescription(playerName){
 //
 //
 //
-//
-//
 //}
 //trySend();
 //
 //}
 //query1();
 
+
 var oTxt = document.getElementById('list');
 var oBtn = document.getElementById('btn');
-//var oList = document.getElementById('list');
 
-
-
-//点击事件
-//oTxt.addEventListener('input', function(e){
-//	if(e.keyCode == 13){
-//		var keyWord = oTxt.value;
-//		// var fruitList = searchByIndexOf(keyWord,fruits);
-//		var fruitList = searchByRegExp(keyWord, fruits);
-//		renderFruits(fruitList);
-//	}
-//}, false);
 
 oBtn.addEventListener('click', function(){
 	var playerName = oTxt.value;
@@ -120,55 +130,15 @@ oBtn.addEventListener('click', function(){
 
 }, false);
 
-//
-////回车查询
-//oTxt.oninput = function(){
-//    oList.innerHTML='';
-//	var keyWord = oTxt.value;
-//	var len = keyWord.length;
-//	// var fruitList = searchByIndexOf(keyWord,fruits);
-//	var fruitList = searchByRegExp(keyWord, fruits);
-//	console.log(fruitList);
-//	addOption(fruitList);
-//
-//}
-//
 fruitList = [{"id":"001","name":"test"},{"id":"002","name":"test2"}]
+
 $.each(fruitList, function (i, item) {
+
 	$('#myselect').append($('<option>', {
 		value: item.name,
 		text : item.name
 	}));
-});
-//function addOption(fruitList){
-//	var obj = document.getElementById("myselect");
-//	console.log(obj);
-//	var len = fruitList.length;
-//	for (var i = 0; i < len; i++){
-//		obj.append($('<option>',{value:i,text:fruitList[i].name}));
-//	}
-//}
-//
-//
-//addOption(fruitList);
+}
+);
 
-//$(document).ready(function(){
-//	var url = "http://localhost:8080/data.json";
-//	$.ajax({
-//		type:"get",
-//		url: url,
-//		success:function(userList){
-//		var unitObj = document.getElementById("list");
-//		if(userList!=null){
-//			for(var i = 0; i <userList.length;i++){
-//				unitObj.options.add(new Option(userList[i],userList[i].name));
-//			}
-//		}
-//	},
-//	error:function(){
-//		console.log("get nba player list error");
-//	}
-//
-//	})
-//})
 
