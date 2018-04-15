@@ -16,6 +16,7 @@ function openPlayerDescription(playerName){
 	newdocument=newwindow.document;
 	newdocument.write(HTMLstring);
 	newdocument.close();
+
 }
 //function conn(){
 //	var strConnString = "Provider=OraOLEDB.Oracle;" +
@@ -45,26 +46,26 @@ function openPlayerDescription(playerName){
 //}
 //conn();
 
-var oracledb = require('oracledb');
-
-var oraConfig = require('./dbconfig.js');
-oracledb.getConnection(oraConfig, function(err, connection) {
-	if (err) {
-		console.log("Fail to connect oracle:", err);
-		return;
-	}
-
-	connection.setAutoCommit(true);
-	connection.execute("select player_name from players", [], function(err, result) {
-		if (err) {
-			console.log(err);
-			return;
-		}
-		console.log(JSON.parse(result));
-		connection.close();
-
-	});
-});
+//var oracledb = require('oracledb');
+//
+//var oraConfig = require('./dbconfig.js');
+//oracledb.getConnection(oraConfig, function(err, connection) {
+//	if (err) {
+//		console.log("Fail to connect oracle:", err);
+//		return;
+//	}
+//
+//	connection.setAutoCommit(true);
+//	connection.execute("select player_name from players", [], function(err, result) {
+//		if (err) {
+//			console.log(err);
+//			return;
+//		}
+//		console.log(JSON.parse(result));
+//		connection.close();
+//
+//	});
+//});
 
 
 //function query1(){
@@ -117,18 +118,11 @@ oracledb.getConnection(oraConfig, function(err, connection) {
 //query1();
 
 
-var oTxt = document.getElementById('list');
+var oTxt = document.getElementById('myselect');
 var oBtn = document.getElementById('btn');
 
 
-oBtn.addEventListener('click', function(){
-	var playerName = oTxt.value;
 
-	console.log(playerName);
-	openPlayerDescription(playerName);
-
-
-}, false);
 
 fruitList = [{"id":"001","name":"test"},{"id":"002","name":"test2"}]
 
@@ -141,4 +135,13 @@ $.each(fruitList, function (i, item) {
 }
 );
 
+oBtn.addEventListener('click', function(){
+	var playerName = oTxt.value;
+	console.log(playerName);
+	var url = "playerTemplate.html?playerName="+playerName;
+	playerWindow = window.open(url);
+	//playerdocument = playerWindow.document;
+	//playerdocument.write(playerName);
+	//playerdocument.close();
+}, false);
 
