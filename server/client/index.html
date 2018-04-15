@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="js/modernizr.custom.js"></script>
     
     <script type="text/javascript" src="./js/openTeamDescription.js"></script>
-	  <script type="text/javascript" src="./js/openTeamDescription.js"></script>
+	  <!--<script type="text/javascript" src="./js/openPlayerDescription.js"></script>-->
 	  <script type="text/javascript" src="./js/plotly-latest.min.js"></script>
 		  <script type="text/javascript" src="js/plot.js"></script></head>
 
@@ -55,13 +55,13 @@
           <ul class="nav navbar-nav">
             <li><a href="#team">Team</a></li>
 			<li> <a href="#PlayerSearch"> Search</a></li>
-			<li> <a href="#figure1" > Top 5 Score Player </a></li>
-			<li> <a href="#figure2" > Top 5 Assist</a></li>
-			<li> <a href="#figure3" > Top 5 Rebound </a></li>
-			<li> <a href="#figure4" > Top 5 Block</a></li>
-			<li> <a href="#figure5" > Top 5 Steal </a></li>
-			<li> <a href="#figure6" > Top 5 Score Teams</a></li>
-			<li> <a href="#figure7" > Top 5 Win/Loss Ratio </a></li>
+			<li> <a href="#figure1" > Top 10 Score Player </a></li>
+			<li> <a href="#figure2" > Top 10 Assist</a></li>
+			<li> <a href="#figure3" > Top 10 Rebound </a></li>
+			<li> <a href="#figure4" > Top 10 Block</a></li>
+			<li> <a href="#figure5" > Top 10 Steal </a></li>
+			<li> <a href="#figure6" > Top 10 Score Teams</a></li>
+			<li> <a href="#figure7" > Top 10 Win/Loss  </a></li>
 
         </div><!--/.nav-collapse -->
       </div>
@@ -237,11 +237,15 @@
 					<br>
 					<br>
 					<div class="row">
-						<h2 class="centered">TOP 5 SCORE PLAYERS</h2>
+						<h2 class="centered">TOP 10 SCORE PLAYERS</h2>
 						<hr>
 						<br>
 						<div id="figure11" class="col-lg-offset-2 col-lg-8">
-							<P><span></span> <a id="123"onclick="pieChart('123', [73, 9])"> FIGURES</a> <br/></P>
+
+							<P><span></span> <a id="figure1f"
+												onclick="barPlot([['Russell Westbrook', 'James Harden','Isaiah Thomas','Anthony Davis','DeMar DeRozan','Damian Lillard','DeMarcus Cousins','LeBron James','Kawhi Leonard','Stephen Curry'],
+												 [31.6, 29.1,28.9,28.0,27.3,27.0,27.0,26.4,25.5,25.3]],'figure1f','Scores')"> FIGURES</a> <br/></P>
+
 
 					</div><!-- col-lg -->
 					</div><!-- row -->
@@ -251,11 +255,13 @@
 					<br>
 					<br>
 					<div class="row">
-						<h2 class="centered">TOP 5 ASSIST</h2>
+						<h2 class="centered">TOP 10 ASSIST</h2>
 						<hr>
 						<br>
 						<div class="col-lg-offset-2 col-lg-8">
-							<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+							<P><span></span> <a id="figure2f"
+												onclick="barPlot([['James Harden', 'John Wall','Russell Westbrook', 'Chris Paul', 'Ricky Rubio','LeBron James', 'Jeff Teague','Jrue Holiday','Draymond Green','Kyle Lowry'],
+												 [11.2,10.7,10.4,9.2,9.1,8.7,7.8,7.3,7.0,7.0]],'figure2f','Assist')"> FIGURES</a> <br/></P>
 					</div><!-- col-lg -->
 				</div><!-- row -->
 				</div>
@@ -263,11 +269,13 @@
 							<br>
 							<br>
 							<div class="row">
-								<h2 class="centered">TOP 5 REBOUND</h2>
+								<h2 class="centered">TOP 10 REBOUND</h2>
 								<hr>
 								<br>
 								<div class="col-lg-offset-2 col-lg-8">
-									<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+									<P><span></span> <a id="figure3f"
+														onclick="barPlot([['Hassan Whiteside', 'Andre Drummond','DeAndre Jordan', 'Rudy Gobert','Dwight Howard', 'Karl-Anthony Towns','Anthony Davis', 'Tyson Chandler','Kevin Love', 'DeMarcus Cousins'],
+									 [14.1, 13.8,13.8,12.8,12.7,12.3,11.8,11.5,11.1,11.0]],'figure3f','Scores')"> FIGURES</a> <br/></P>
 								</div><!-- col-lg -->
 					</div><!-- row -->
 					</div>
@@ -275,11 +283,12 @@
 							<br>
 							<br>
 							<div class="row">
-								<h2 class="centered">TOP 5 BLOCK</h2>
+								<h2 class="centered">TOP 10 BLOCK</h2>
 								<hr>
 								<br>
 								<div class="col-lg-offset-2 col-lg-8">
-									<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+									<P><span></span> <a id="figure4f"
+														onclick="barPlot([['Rudy Gobert', 'Joel Embiid','Anthony Davis','Myles Turner','Hassan Whiteside','Kristaps Porzingis','Giannis Antetokounmpo','Brook Lopez','DeAndre Jordan','Kevin Durant'], [2.6, 2.5,2.2,2.1,2.1,2.0,1.9,1.7,1.7,1.6]],'figure4f','Block')"> FIGURES</a> <br/></P>
 							</div><!-- col-lg -->
 					</div><!-- row -->
 					</div>
@@ -291,7 +300,7 @@
 								<hr>
 								<br>
 								<div class="col-lg-offset-2 col-lg-8">
-									<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+									<P><span></span> <a id="figure5f" onclick="barPlot([['player1', 'player2'], [20, 10]],'figure5f','Scores')"> FIGURES</a> <br/></P>
 								</div><!-- col-lg -->
 							</div><!-- row -->
 						</div>
@@ -303,10 +312,11 @@
 									<hr>
 									<br>
 									<div class="col-lg-offset-2 col-lg-8">
-										<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+										<P><span></span> <a id="figure6f" onclick="barPlot([['player1', 'player2'], [20, 10]],'figure6f','Scores')"> FIGURES</a> <br/></P>
 									</div><!-- col-lg -->
 								</div><!-- row -->
 							</div>
+
 							<div class="container" id="figure7" name="figure7">
 								<br>
 								<br>
@@ -315,9 +325,9 @@
 									<hr>
 									<br>
 									<div class="col-lg-offset-2 col-lg-8">
-										<P><span></span> <a href="#"> FIGURES</a> <br/></P>
-									</div><!-- col-lg -->
-							</div><!-- row -->
+										<P><span></span> <a id="figure7f" onclick="barPlot([['player1', 'player2'], [20, 10]],'figure7f','Scores')"> FIGURES</a> <br/></P>									</div><!-- col-lg -->
+								</div><!-- col-lg -->
+								</div><!-- row -->
 							</div>
 				<br>
 				<br>
@@ -335,7 +345,8 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 	<script type="text/javascript" src="./js/openPlayerDescription.js"></script>
-				<script type="text/javascript" src="./js/plotly-latest.min.js"></script>
+	<script type="text/javascript" src="./js/plotly-latest.min.js"></script>
+
 
 				<script type="text/javascript" src="js/plot.js"></script>
 	<script type="text/javascript" src="./js/query.js"></script>
@@ -345,6 +356,7 @@
 				query_allName();
 		})
 	</script>
+
 
   </body>
 </html>

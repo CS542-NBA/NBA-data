@@ -1,32 +1,75 @@
-function barplot(playerName, stat, div_id) {
+// data=[['player1', 'player2', 'player3'], [30, 28, 27]]
+
+function barplot(data, div_id, statName) {
+    var div_id
+    var y = data[1]
+    var ymin = Math.min(...y)
+    var ymax = Math.max(...y)
+
     var data = [
         {
-            x: playerName,
-            y: stat,
+            x: data[0],
+            y: data[1],
             type : 'bar',
             marker: {
-                color: 'rgb(100, 200, 300)'
+                color: 'rgba(58,200,225,.5)'
             }
         }
     ];
+    var layout = {  xaxis:{type: 'category'},
+                    yaxis: {range: [ymin/2, 1.1 * ymax]}};
 
-    var layout = {title: 'NBA STAT BARPLOT'};
     return Plotly.newPlot(div_id, data, layout)
 }
 
-function pieChart(id, values) {
+
+
+function pieChart(data, div_id, labels) {
+    var div_id
     var data= [
         {
-            values: values,
-            labels: ['Win', 'Loss'],
+            values: data,
+            labels: labels,
             type: 'pie'
         }
     ];
+    var div_id;
 
     var layout = {
-        height: 400,
-        width: 500
+        height: 500,
+        width: 600
     };
 
-    return  Plotly.newPlot(id, data, layout);
+    return  Plotly.newPlot(div_id, data, layout);
 }
+
+
+function radarChart(data, div_id){
+    var data
+    var div_id
+    stat_min = 0.0
+    stat_max = [31.6, 14.1, 11.2, 2.0, 2.6]
+    for(i=0; i<data.length; i++){
+        data[i] = (data[i] - stat_min)/stat_max[i]-stat_min
+    }
+
+    data = [{
+        type: 'scatterpolar',
+        r: data,
+        theta: ['Scores', 'Rebound', 'Assist', 'Steal', 'Block'],
+        fill: 'toself'
+    }]
+  var div_id;
+
+    var layout = {
+        polar: {
+            radialaxis: {
+                visible: false,
+                range: [0, 1]
+            }
+        },
+        showlegend: false
+    }
+    return Plotly.newPlot(div_id, data, layout)
+}
+
