@@ -143,6 +143,14 @@
     <script type="text/javascript" src="js/smoothscroll.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
 	<script type="text/javascript" src="./js/searchPlayer.js"></script>
-
+	<script type="text/javascript" src="js/query.js"></script>
+	<script>
+		$(document).ready(
+			function(){
+				query_playerStat(getURLParameter('playerName'));
+				query_player3Point(getURLParameter('playerName'));
+				query_playerInfo(getURLParameter('playerName'));
+		})
+	</script>
   </body>
 </html>
