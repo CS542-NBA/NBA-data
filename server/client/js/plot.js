@@ -24,7 +24,7 @@ function barplot(data, div_id, statName) {
 
 
 
-function pieChart(data, div_id, labels) {
+function pieChart(data, div_id, labels) { 
     var div_id
     var data= [
         {

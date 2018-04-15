@@ -54,7 +54,7 @@ function parseJson(str){
             table[i+1][1]=table[i+1][1].replace(/\s+$/,'');
     }
 
-    console.log(table);
+    //console.log(table);
 	return table;
 }
 function parseMaxStat(str){
@@ -66,12 +66,32 @@ function parseMaxStat(str){
 		Object.entries(jsonData.metaData[i]).forEach(([key,value])=>temp.push(value));
 		
 	}
+
 	table.push(temp);
+
 	for(i=0;i<jsonData.rows.length;i++){
+
             table.push(jsonData.rows[i]);
     }
 
-    console.log(table);
+    //console.log(table);
+	return table;
+}
+function parsePlayerStat(str){
+	var table=[];
+	var jsonData=JSON.parse(str);
+	var temp=[];
+
+	for(i=0;i<jsonData.rows.length;i++){
+            table.push(jsonData.rows[i][0]);
+            table.push(jsonData.rows[i][1]);
+            table.push(jsonData.rows[i][2]);
+            table.push(jsonData.rows[i][3]);
+            table.push(jsonData.rows[i][4]);
+            break;
+    }
+
+    //console.log(table);
 	return table;
 }
 function parseAllNameJson(str){
@@ -87,7 +107,7 @@ function parseAllNameJson(str){
             table.push(tempdic);
     }
 
-    console.log(table);
+    //console.log(table);
 	return table;
 }
 
@@ -111,7 +131,7 @@ function query_PlayerInTeam(team){
        
     }
     var reqsend="select team,p.PLAYER_NAME from players_team pt,players p where pt.player_id = p.player_id and team='"+team+"'";
-    console.log(reqsend);
+    //console.log(reqsend);
     xhr.send(reqsend); 
 }
 function query_top3Score(team){
@@ -242,24 +262,7 @@ function query_allName(){
     xhr.send(reqsend); 
 }
 function query_playerStat(player){
-	var str="";
-	var xhr=new XMLHttpRequest();
-    xhr.open("POST","http://localhost:5000",true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    var dbres;
-    xhr.onreadystatechange=function(){
-      if(xhr.readyState===4 ){
-        //console.log(xhr.responseText);
-       	str=str+xhr.responseText;
-       	dbres=parseMaxStat(str);
-       	//console.log(dbres);
-        }
-       
-    }
-    var reqsend="select max(ps.points),max(ps.ast),max(ps.trb),max(ps.blk),max(ps.stl) \
-	from players_statistic ps";
-    console.log(reqsend);
-    xhr.send(reqsend);
+
     //query ONE player's stat
     var str2="";
 	var xhr2=new XMLHttpRequest();
@@ -270,13 +273,15 @@ function query_playerStat(player){
       if(xhr2.readyState===4 ){
         //console.log(xhr.responseText);
        	str2=str2+xhr2.responseText;
-       	dbres2=parseMaxStat(str2);
-       	console.log("Here's first result",dbres);
+       	dbres2=parsePlayerStat(str2);
+
+       	//dbres2.shift();
+       	radarChart(dbres2,"figure1f");
        	console.log("Here's sec result",dbres2);
         }
        
     }
-    var reqsend2="select ps.points,ps.ast,ps.trb,ps.blk,ps.stl \
+    var reqsend2="select ps.points,ps.trb,ps.ast,ps.stl,ps.blk \
 	from players_statistic ps, players p \
 	where ps.player_id=p.player_id and p.player_name ='"+player+"'";
     console.log(reqsend2);
