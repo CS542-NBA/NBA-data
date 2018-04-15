@@ -86,13 +86,12 @@ var qs=require('querystring');
 //*/
 //
 var http=require('http');
-console.log("test");
 
 http.createServer(function(request,response){
   var body='';
 
   request.on('data',function(data){
-    console.log("data "+data); ////data is right
+    console.log("data: "+data); ////data is right
     body+=data; //body+=data
 
   });
@@ -124,7 +123,7 @@ http.createServer(function(request,response){
 
 
       connection.execute(
-          "select * from CITY",
+          body,
         function(err, result)
         {
           if (err) {

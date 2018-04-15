@@ -1,6 +1,11 @@
-//statName='Scores'
-//e.g. data= [['player1', 'player2'], [20, 10]]
-function barPlot(data, div_id, statName) {
+// data=[['player1', 'player2', 'player3'], [30, 28, 27]]
+
+function barplot(data, div_id, statName) {
+    var div_id
+    var y = data[1]
+    var ymin = Math.min(...y)
+    var ymax = Math.max(...y)
+
     var data = [
         {
             x: data[0],
@@ -11,15 +16,16 @@ function barPlot(data, div_id, statName) {
             }
         }
     ];
-    var div_id;
-    var title = 'NBA Top 5 ' + statName
-    var layout = {title: title};
+    var layout = {  xaxis:{type: 'category'},
+                    yaxis: {range: [ymin/2, 1.1 * ymax]}};
+
     return Plotly.newPlot(div_id, data, layout)
 }
 
 
-//labels=['Win', 'Loss']
+
 function pieChart(data, div_id, labels) {
+    var div_id
     var data= [
         {
             values: data,
@@ -30,14 +36,23 @@ function pieChart(data, div_id, labels) {
     var div_id;
 
     var layout = {
-        height: 400,
-        width: 500
+        height: 500,
+        width: 600
     };
 
     return  Plotly.newPlot(div_id, data, layout);
 }
-//e.g. data=[0.5, 0.6, 0.5, 0.2, 0.3]
+
+
 function radarChart(data, div_id){
+    var data
+    var div_id
+    stat_min = 0.0
+    stat_max = [31.6, 14.1, 11.2, 2.0, 2.6]
+    for(i=0; i<data.length; i++){
+        data[i] = (data[i] - stat_min)/stat_max[i]-stat_min
+    }
+
     data = [{
         type: 'scatterpolar',
         r: data,
@@ -49,11 +64,12 @@ function radarChart(data, div_id){
     var layout = {
         polar: {
             radialaxis: {
-                visible: true,
-                range: [0, 20]
+                visible: false,
+                range: [0, 1]
             }
         },
         showlegend: false
     }
     return Plotly.newPlot(div_id, data, layout)
 }
+

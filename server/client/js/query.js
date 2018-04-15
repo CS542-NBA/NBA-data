@@ -1,4 +1,4 @@
-import * from 'plot.js';
+
 /*
 function query1(){
 	var str="";
@@ -57,6 +57,40 @@ function parseJson(str){
     console.log(table);
 	return table;
 }
+function parseMaxStat(str){
+	var table=[];
+	var jsonData=JSON.parse(str);
+	var temp=[];
+	
+	for(var i=0;i<jsonData.metaData.length;i++){
+		Object.entries(jsonData.metaData[i]).forEach(([key,value])=>temp.push(value));
+		
+	}
+	table.push(temp);
+	for(i=0;i<jsonData.rows.length;i++){
+            table.push(jsonData.rows[i]);
+    }
+
+    console.log(table);
+	return table;
+}
+function parseAllNameJson(str){
+	var table=[];
+	var jsonData=JSON.parse(str);
+	var temp=[];
+	
+	for(i=0;i<jsonData.rows.length;i++){
+			tempname=jsonData.rows[i];
+			tempname=tempname[0].replace(/\s+$/,'');
+			tempdic={};
+			tempdic['name']=tempname;
+            table.push(tempdic);
+    }
+
+    console.log(table);
+	return table;
+}
+
 
 function query_PlayerInTeam(team){
 	var str="";
@@ -176,6 +210,126 @@ function query_arena(team){
        
     }
     var reqsend="";
+    console.log(reqsend);
+    xhr.send(reqsend); 
+}
+function query_allName(){
+	var str="";
+	var xhr=new XMLHttpRequest();
+    
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str=str+xhr.responseText;
+       	dbres=parseAllNameJson(str);
+       	console.log(dbres);
+       	$.each(dbres,function(i,item){
+       		$('#myselect').append($('<option>',{
+       			value:item.name,
+       			text:item.name
+       		}));
+       	});
+
+        //document.getElementById("viewSection").innerHTML=xhr.responseText;
+        }
+       
+    }
+    var reqsend="select player_name from players";
+    console.log(reqsend);
+    xhr.send(reqsend); 
+}
+function query_playerStat(player){
+	var str="";
+	var xhr=new XMLHttpRequest();
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str=str+xhr.responseText;
+       	dbres=parseMaxStat(str);
+       	//console.log(dbres);
+        }
+       
+    }
+    var reqsend="select max(ps.points),max(ps.ast),max(ps.trb),max(ps.blk),max(ps.stl) \
+	from players_statistic ps";
+    console.log(reqsend);
+    xhr.send(reqsend);
+    //query ONE player's stat
+    var str2="";
+	var xhr2=new XMLHttpRequest();
+    xhr2.open("POST","http://localhost:5000",true);
+    xhr2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres2;
+    xhr2.onreadystatechange=function(){
+      if(xhr2.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str2=str2+xhr2.responseText;
+       	dbres2=parseMaxStat(str2);
+       	console.log("Here's first result",dbres);
+       	console.log("Here's sec result",dbres2);
+        }
+       
+    }
+    var reqsend2="select ps.points,ps.ast,ps.trb,ps.blk,ps.stl \
+	from players_statistic ps, players p \
+	where ps.player_id=p.player_id and p.player_name ='"+player+"'";
+    console.log(reqsend2);
+    xhr2.send(reqsend2);
+
+
+}
+function query_player3Point(player){
+	var str="";
+	var xhr=new XMLHttpRequest();
+    
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str=str+xhr.responseText;
+       	dbres=parseMaxStat(str);
+       	console.log(dbres);
+
+        //document.getElementById("viewSection").innerHTML=xhr.responseText;
+        }
+       
+    }
+    var reqsend="select ps.\"3P\",ps.\"3PA\",ps.\"3P%\" \
+	from players_statistic ps, players p \
+	where ps.player_id=p.player_id and p.player_name ='"+player+"'";
+    console.log(reqsend);
+    xhr.send(reqsend); 
+}
+function query_playerInfo(player){
+	var str="";
+	var xhr=new XMLHttpRequest();
+    
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str=str+xhr.responseText;
+       	dbres=parseMaxStat(str);
+       	console.log(dbres);
+
+        //document.getElementById("viewSection").innerHTML=xhr.responseText;
+        }
+       
+    }
+    var reqsend="select pm.twitter_followers_millions,p.pos,p.birth_year,ps.salary_millions \
+	from players p LEFT OUTER JOIN players_media pm on p.player_id = pm.player_id \
+ 	left OUTER JOIN players_statistic ps on p.player_id = ps.player_id \
+	where p.player_name ='"+player+"'";
     console.log(reqsend);
     xhr.send(reqsend); 
 }
