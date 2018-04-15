@@ -1,43 +1,13 @@
-function query1(){
-	var str="";
-	function printxhr(data){
-		var jsonData=JSON.parse(data);
-          for(var i=0;i<jsonData.metaData.length;i++){
-            var metaD=jsonData.metaData[i];
-            console.log(metaD.name);
-          }
-          for(i=0;i<jsonData.rows.length;i++){
-            var row=jsonData.rows[i];
-            console.log(row);
-          }
-		
-	}
-	function trySend(){
-	    /*
-	    var callstate=function (value){
-	      this.setState({returnValue:value});
-	    }
-	    callstate=callstate.bind(this);
-	    */
-	    var xhr=new XMLHttpRequest();
 
-	    
-	    xhr.open("POST","http://localhost:5000",true);
-	    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	    //console.log("hi");
-	    xhr.onreadystatechange=function(){
-	      if(xhr.readyState===4 ){
-	        //console.log(xhr.responseText);
-	       	str=str+xhr.responseText;
-	       	console.log("xhr:",xhr.responseText);
-	       	printxhr(str);
-	        //document.getElementById("viewSection").innerHTML=xhr.responseText;
-	        }
-	       
-	    }    
-	    xhr.send('SELECT * FROM CONF'); 
-	    
-    
-	}
-	trySend();
+function getURLParameter(name){
+	return decodeURIComponent((new RegExp('[?|&]' + name + '=' +
+					'([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 }
+
+var playername = getURLParameter('playerName');
+console.log(playername);
+var test = document.getElementById("name");
+console.log(test);
+test.innerHTML=playername;
+
+fruitList = [{"id":"001","name":"test"},{"id":"002","name":"test2"}]

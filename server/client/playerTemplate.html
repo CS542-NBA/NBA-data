@@ -6,7 +6,6 @@
     <meta name="description" content="NBA players">
     <meta name="author" content="Carlos Alvarez - Alvarez.is - blacktie.co">
 	<stype type=""text/>css">
-	  p.flower {background-image:url('images/james.jpg') no repeat left top;padding:20px;}
 
 	</styple>
     <title> NBA players </title>
@@ -24,9 +23,8 @@
     
     <script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/modernizr.custom.js"></script>
-    <script type="text/javascript" src="./js/query1.js"></script>
-    <script type="text/javascript" src="./js/openTeamDescription.js"></script>
-	<script type="text/javascript" src="./js/openPlayerDescription.js"></script>
+
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
@@ -48,7 +46,8 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#playerName" class="smoothScroll">Name</a></li>
+            <li ><a id = "name" href="#playerName" class="smoothScroll" ></a></li>
+
 			<li> <a href="#figure1" class="smoothScroll"> statistic</a></li>
 			<li> <a href="#figure2" class="smoothScroll"> salary</a></li>
 			<li> <a href="#figure3" class="smoothScroll"> media</a></li>
@@ -63,9 +62,24 @@
 		<!-- ==== HEADERWRAP ==== -->
 	    <div id="headerwrap" id="home" name="home" style="background:url('images/player_backgroud.jpeg') no-repeat center top; background-size:100% 50% ; ">
 			<div class="container" id="playerName" >
-				<img class="'pos" src="images/james.jpg" style="no-repeat left top; background-size: 30%;"; >
+				<img class="'pos" src="images/james.jpg" style="no-repeat: left top; background-size: 30%;"; >
 			</div>
-
+			<table id="statistic" class="display hover" border="1">
+				<thead>
+				<tr>
+					<th>3pts</th>
+					<th>position</th>
+					<th width="10%">salary</th>
+				</tr>
+				</thead>
+				<tbody id="tbody">
+				<tr id="content" class="example">
+					<td id="3pts">2</td>
+					<td id="position">3</td>
+					<td id="salary">4</td>
+				</tr>
+				</tbody>
+			</table>
 
 	    </div><!-- /headerwrap -->
 
@@ -127,6 +141,7 @@
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/smoothscroll.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
+	<script type="text/javascript" src="./js/searchPlayer.js"></script>
 
   </body>
 </html>
