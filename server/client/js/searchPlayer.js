@@ -5,9 +5,7 @@ function getURLParameter(name){
 }
 
 var playername = getURLParameter('playerName');
+
 console.log(playername);
 var test = document.getElementById("name");
-console.log(test);
-test.innerHTML=playername;
-
-fruitList = [{"id":"001","name":"test"},{"id":"002","name":"test2"}]
+test.innerHTML = playername;
