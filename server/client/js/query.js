@@ -1,3 +1,4 @@
+import * from 'plot.js';
 /*
 function query1(){
 	var str="";
@@ -69,14 +70,112 @@ function query_PlayerInTeam(team){
         //console.log(xhr.responseText);
        	str=str+xhr.responseText;
        	dbres=parseJson(str);
-       	return dbres;
-       	//console.log("xhr:",xhr.responseText);
-       	//printxhr(str);
+       	console.log(dbres);
+
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
        
     }
-    var reqsend="select team,p.PLAYER_NAME from players_team pt,players p where pt.player_id = p.player_id and team='Minnesota Timberwolves'";
+    var reqsend="select team,p.PLAYER_NAME from players_team pt,players p where pt.player_id = p.player_id and team='"+team+"'";
+    console.log(reqsend);
+    xhr.send(reqsend); 
+}
+function query_top3Score(team){
+	var str="";
+	var xhr=new XMLHttpRequest();
+    
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str=str+xhr.responseText;
+       	dbres=parseJson(str);
+       	console.log(dbres);
+
+        //document.getElementById("viewSection").innerHTML=xhr.responseText;
+        }
+       
+    }
+    var reqsend="select * from (select p.PLAYER_NAME,ps.points \
+	from players_statistic ps, players_team pt, players p \
+	where p.player_id=ps.player_id and pt.TEAM='"+team+"' and pt.player_id=p.player_id \
+	order by ps.points desc \
+	) \
+	where rownum<=3;"
+    console.log(reqsend);
+    xhr.send(reqsend); 
+}
+function query_top3Assist(team){
+	var str="";
+	var xhr=new XMLHttpRequest();
+    
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str=str+xhr.responseText;
+       	dbres=parseJson(str);
+       	console.log(dbres);
+
+        //document.getElementById("viewSection").innerHTML=xhr.responseText;
+        }
+       
+    }
+    var reqsend="select * from (select p.PLAYER_NAME,ps.ast \
+	from players_statistic ps, players_team pt, players p \
+	where p.player_id=ps.player_id and pt.TEAM='"+team+"' and pt.player_id=p.player_id \
+	order by ps.points desc \
+	) \
+	where rownum<=3;"
+    console.log(reqsend);
+    xhr.send(reqsend); 
+}
+function query_teamInfo(team){
+	var str="";
+	var xhr=new XMLHttpRequest();
+    
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str=str+xhr.responseText;
+       	dbres=parseJson(str);
+       	console.log(dbres);
+
+        //document.getElementById("viewSection").innerHTML=xhr.responseText;
+        }
+       
+    }
+    var reqsend="select coference, division, head_coach from coach where coach.team='"+team+";";
+    console.log(reqsend);
+    xhr.send(reqsend); 
+}
+//not fill IN SQL yet
+function query_arena(team){
+	var str="";
+	var xhr=new XMLHttpRequest();
+    
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str=str+xhr.responseText;
+       	dbres=parseJson(str);
+       	console.log(dbres);
+
+        //document.getElementById("viewSection").innerHTML=xhr.responseText;
+        }
+       
+    }
+    var reqsend="";
     console.log(reqsend);
     xhr.send(reqsend); 
 }
