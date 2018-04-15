@@ -5,6 +5,7 @@ function barplot(data, div_id, statName) {
     var y = data[1]
     var ymin = Math.min(...y)
     var ymax = Math.max(...y)
+
     var data = [
         {
             x: data[0],
@@ -17,6 +18,7 @@ function barplot(data, div_id, statName) {
     ];
     var layout = {  xaxis:{type: 'category'},
                     yaxis: {range: [ymin/2, 1.1 * ymax]}};
+
     return Plotly.newPlot(div_id, data, layout)
 }
 
@@ -31,6 +33,7 @@ function pieChart(data, div_id, labels) {
             type: 'pie'
         }
     ];
+    var div_id;
 
     var layout = {
         height: 500,
@@ -40,6 +43,7 @@ function pieChart(data, div_id, labels) {
     return  Plotly.newPlot(div_id, data, layout);
 }
 
+
 function radarChart(data, div_id){
     var data
     var div_id
@@ -48,12 +52,14 @@ function radarChart(data, div_id){
     for(i=0; i<data.length; i++){
         data[i] = (data[i] - stat_min)/stat_max[i]-stat_min
     }
+
     data = [{
         type: 'scatterpolar',
         r: data,
         theta: ['Scores', 'Rebound', 'Assist', 'Steal', 'Block'],
         fill: 'toself'
     }]
+  var div_id;
 
     var layout = {
         polar: {
