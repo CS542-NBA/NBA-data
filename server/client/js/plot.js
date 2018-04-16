@@ -49,16 +49,20 @@ function radarChart(data, div_id){
     var div_id;
     stat_min = 0.0;
     stat_max = [31.6, 14.1, 11.2, 2.0, 2.6];
+
+
     for(i=0; i<data.length; i++){
         data[i] = (data[i] - stat_min)/stat_max[i]-stat_min;
     }
-
+    
+    
     data = [{
         type: 'scatterpolar',
         r: data,
         theta: ['Scores', 'Rebound', 'Assist', 'Steal', 'Block'],
         fill: 'toself'
     }]
+    
   var div_id;
 
     var layout = {

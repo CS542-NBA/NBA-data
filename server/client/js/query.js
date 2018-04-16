@@ -1,43 +1,4 @@
 
-/*
-function query1(){
-	var str="";
-	function printxhr(data){
-		var jsonData=JSON.parse(data);
-          for(var i=0;i<jsonData.metaData.length;i++){
-            var metaD=jsonData.metaData[i];
-            console.log(metaD.name);
-          }
-          for(i=0;i<jsonData.rows.length;i++){
-            var row=jsonData.rows[i];
-            console.log(row);
-          }
-		
-	}
-	function trySend(){
-	    var xhr=new XMLHttpRequest();
-
-	    
-	    xhr.open("POST","http://localhost:5000",true);
-	    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	    //console.log("hi");
-	    xhr.onreadystatechange=function(){
-	      if(xhr.readyState===4 ){
-	        //console.log(xhr.responseText);
-	       	str=str+xhr.responseText;
-	       	console.log("xhr:",xhr.responseText);
-	       	printxhr(str);
-	        //document.getElementById("viewSection").innerHTML=xhr.responseText;
-	        }
-	       
-	    }    
-	    xhr.send('SELECT * FROM CONF'); 
-	    
-    
-	}
-	trySend();
-}
-*/
 function parseJson(str){
 	var table=[];
 	var jsonData=JSON.parse(str);
@@ -61,22 +22,24 @@ function parseMaxStat(str){
 	var table=[];
 	var jsonData=JSON.parse(str);
 	var temp=[];
-	
+	console.log(jsonData);
+
 	for(var i=0;i<jsonData.metaData.length;i++){
 		Object.entries(jsonData.metaData[i]).forEach(([key,value])=>temp.push(value));
 		
 	}
-
+  console.log(temp);
+  
 	table.push(temp);
 
 	for(i=0;i<jsonData.rows.length;i++){
-
             table.push(jsonData.rows[i]);
     }
-
+    
     //console.log(table);
 	return table;
 }
+/*
 function parsePlayerStat(str){
 	var table=[];
 	var jsonData=JSON.parse(str);
@@ -94,6 +57,7 @@ function parsePlayerStat(str){
     //console.log(table);
 	return table;
 }
+*/
 function parseAllNameJson(str){
 	var table=[];
 	var jsonData=JSON.parse(str);
@@ -264,28 +228,27 @@ function query_allName(){
 function query_playerStat(player){
 
     //query ONE player's stat
-    var str2="";
-	var xhr2=new XMLHttpRequest();
-    xhr2.open("POST","http://localhost:5000",true);
-    xhr2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    var dbres2;
-    xhr2.onreadystatechange=function(){
-      if(xhr2.readyState===4 ){
+    var str="";
+	var xhr=new XMLHttpRequest();
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
         //console.log(xhr.responseText);
-       	str2=str2+xhr2.responseText;
-       	dbres2=parsePlayerStat(str2);
-
-       	//dbres2.shift();
-       	radarChart(dbres2,"figure1f");
-       	console.log("Here's sec result",dbres2);
+       	str=str+xhr.responseText;
+       	dbres=parseMaxStat(str);
+       	dbres.shift();
+        console.log(dbres);
+       	radarChart(dbres,"figure1f");
         }
        
     }
-    var reqsend2="select ps.points,ps.trb,ps.ast,ps.stl,ps.blk \
+    var reqsend="select ps.points,ps.trb,ps.ast,ps.stl,ps.blk \
 	from players_statistic ps, players p \
 	where ps.player_id=p.player_id and p.player_name ='"+player+"'";
-    console.log(reqsend2);
-    xhr2.send(reqsend2);
+    console.log(reqsend);
+    xhr.send(reqsend);
 
 
 }
