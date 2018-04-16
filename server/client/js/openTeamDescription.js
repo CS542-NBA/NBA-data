@@ -1,3 +1,4 @@
+/*
 function openTeamDescription(teamName){
 		//teamName="spur";
 		HTMLstring='<HTML>\n';
@@ -17,4 +18,11 @@ function openTeamDescription(teamName){
 		newdocument=newwindow.document;
 		newdocument.write(HTMLstring);
 		newdocument.close();
+}
+*/
+
+function openTeamDes(teamName){
+	console.log(teamName);
+	var url = "teamTemplate.html?teamName="+teamName;
+	teamWindow = window.open(url);
 }

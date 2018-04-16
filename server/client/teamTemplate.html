@@ -17,11 +17,14 @@
 
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
-    
+    <script type="text/javascript" src="./js/searchTeam.js">
+
+    </script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/modernizr.custom.js"></script>
     <script type="text/javascript" src="./js/query.js"></script>
     <script type="text/javascript" src="./js/openTeamDescription.js"></script>
+    
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -34,9 +37,10 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#playerName" class="smoothScroll">Team Players</a></li>
+          	<li><a id="name" href="#teamName" class="smoothScroll"></a></li>
+            <li><a href="#teamPlayers" class="smoothScroll">Team Players</a></li>
 			<li> <a href="#figure1" class="smoothScroll">W/L Ratio</a></li>
-			<li> <a href="#figure2" class="smoothScroll">Coach</a></li>
+			<li> <a href="#figure2" class="smoothScroll">Team Info</a></li>
 			<li> <a href="#figure3" class="smoothScroll">Arena</a></li>
 			<li> <a href="#figure4" class="smoothScroll">Top 3 Stat</a></li>
 	
@@ -46,7 +50,7 @@
     </div>
     <div id="headerwrap" id="home" name="home" style="background:url('images/player_backgroud.jpeg') no-repeat center top; background-size:100% 50% ; ">
 			<div class="container" id="playerName" >
-				<img class="'pos" src="./teamDescription/San Antonio SpursLogo.png" style="no-repeat left top; background-size: 30%;"; >
+				<img class="'pos" id="teamimage" src='' style="no-repeat left top; background-size: 30%;"; height="400" width="400">
 			</div>
 
 
@@ -62,7 +66,7 @@
 						<hr>
 						<br>
 						<div class="col-lg-offset-2 col-lg-8">
-							<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+							<P><span></span> <a id="figure1f" href="#"></a> <br/></P>
 						</div><!-- col-lg -->
 					</div><!-- row -->
 				</div>
@@ -75,7 +79,7 @@
 						<hr>
 						<br>
 						<div class="col-lg-offset-2 col-lg-8">
-							<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+							<P><span></span> <a id="figure2f" href="#"></a> <br/></P>
 						</div><!-- col-lg -->
 					</div><!-- row -->
 				</div>
@@ -83,11 +87,11 @@
 					<br>
 					<br>
 					<div class="row">
-						<h2 class="centered">Coach</h2>
+						<h2 class="centered">Team Info</h2>
 						<hr>
 						<br>
 						<div class="col-lg-offset-2 col-lg-8">
-							<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+							<P><span></span> <a id="figure3f" href="#"></a> <br/></P>
 						</div><!-- col-lg -->
 					</div><!-- row -->
 				</div>
@@ -99,7 +103,7 @@
 						<hr>
 						<br>
 						<div class="col-lg-offset-2 col-lg-8">
-							<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+							<P><span></span> <a id="figure4f" href="#"></a> <br/></P>
 						</div><!-- col-lg -->
 					</div><!-- row -->
 				</div>
@@ -111,7 +115,7 @@
 						<hr>
 						<br>
 						<div class="col-lg-offset-2 col-lg-8">
-							<P><span></span> <a href="#"> FIGURES</a> <br/></P>
+							<P><span></span> <a id="figure5f" href="#"></a> <br/></P>
 						</div><!-- col-lg -->
 					</div><!-- row -->
 				</div>
@@ -127,5 +131,22 @@
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/smoothscroll.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
+
+	<script type="text/javascript" src="js/query.js"></script>
+	<script type="text/javascript" src="js/plot.js"></script>
+	<script type="text/javascript" src="js/plotly-latest.min.js"></script>
+	<script type="text/javascript">
+    	$(document).ready(
+			function(){
+				var teamName=getURLParameter('teamName');
+    			var srcpath='./teamDescription/'+teamName+'.png';
+    			document.getElementById('teamimage').src=srcpath;
+    			query_PlayerInTeam(teamName);
+    			query_teamwl(teamName);
+				query_teamInfo(teamName);
+				query_arena(teamName);
+				query_top3(teamName);
+		})
+    </script>
 </body>
 </html>

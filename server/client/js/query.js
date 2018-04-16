@@ -11,13 +11,22 @@ function parseJson(str){
 	table.push(temp);
 	for(i=0;i<jsonData.rows.length;i++){
             table.push(jsonData.rows[i]);
-            table[i+1][0]=table[i+1][0].replace(/\s+$/,'');
-            table[i+1][1]=table[i+1][1].replace(/\s+$/,'');
+            //table[i+1][0]=table[i+1][0].replace(/\s+$/,'');
+            //table[i+1][1]=table[i+1][1].replace(/\s+$/,'');
+            for(var j=0;j<table[i+1].length;j++){
+              if(typeof table[i+1][j]==='string'){
+                table[i+1][j]=table[i+1][j].replace(/\s+$/,'');
+              }
+              else{
+                table[i+1][j]=round(table[i+1][j],2)
+              }
+            }
     }
 
     //console.log(table);
 	return table;
 }
+/*
 function parseMaxStat(str){
 	var table=[];
 	var jsonData=JSON.parse(str);
@@ -28,10 +37,7 @@ function parseMaxStat(str){
 		Object.entries(jsonData.metaData[i]).forEach(([key,value])=>temp.push(value));
 		
 	}
-  console.log(temp);
-  
 	table.push(temp);
-
 	for(i=0;i<jsonData.rows.length;i++){
             table.push(jsonData.rows[i]);
     }
@@ -39,6 +45,7 @@ function parseMaxStat(str){
     //console.log(table);
 	return table;
 }
+*/
 /*
 function parsePlayerStat(str){
 	var table=[];
@@ -74,7 +81,16 @@ function parseAllNameJson(str){
     //console.log(table);
 	return table;
 }
-
+function round(number, precision) {
+  var shift = function (number, precision, reverseShift) {
+    if (reverseShift) {
+      precision = -precision;
+    }  
+    var numArray = ("" + number).split("e");
+    return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + precision) : precision));
+  };
+  return shift(Math.round(shift(number, precision, false)), precision, true);
+}
 
 function query_PlayerInTeam(team){
 	var str="";
@@ -98,9 +114,9 @@ function query_PlayerInTeam(team){
     //console.log(reqsend);
     xhr.send(reqsend); 
 }
-function query_top3Score(team){
-	var str="";
-	var xhr=new XMLHttpRequest();
+function query_teamwl(team){
+  var str="";
+  var xhr=new XMLHttpRequest();
     
     xhr.open("POST","http://localhost:5000",true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -108,26 +124,60 @@ function query_top3Score(team){
     xhr.onreadystatechange=function(){
       if(xhr.readyState===4 ){
         //console.log(xhr.responseText);
-       	str=str+xhr.responseText;
-       	dbres=parseJson(str);
-       	console.log(dbres);
+        str=str+xhr.responseText;
+        dbres=parseJson(str);
+        console.log(dbres);
 
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
        
     }
-    var reqsend="select * from (select p.PLAYER_NAME,ps.points \
-	from players_statistic ps, players_team pt, players p \
-	where p.player_id=ps.player_id and pt.TEAM='"+team+"' and pt.player_id=p.player_id \
-	order by ps.points desc \
-	) \
-	where rownum<=3;"
-    console.log(reqsend);
+    var reqsend="select win,loss \
+    from team_statistic \
+    where team='"+team+"'";
+    //console.log(reqsend);
     xhr.send(reqsend); 
 }
-function query_top3Assist(team){
-	var str="";
-	var xhr=new XMLHttpRequest();
+function query_top3(team){
+  var result=[];
+  const getData=function(team){
+    return new Promise(function(resolve,reject){
+      var str="";
+      var xhr=new XMLHttpRequest();
+    
+      xhr.open("POST","http://localhost:5000",true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      var dbres;
+      xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+        str=str+xhr.responseText;
+        dbres=parseJson(str);
+        result=dbres;
+        resolve(result);
+        }
+      //else{
+        //reject(new Error("Error at inside"));
+      //}
+    }
+    var reqsend="select * from (select p.PLAYER_NAME,ps.points \
+    from players_statistic ps, players_team pt, players p \
+    where p.player_id=ps.player_id and pt.TEAM='"+team+"' and pt.player_id=p.player_id \
+    order by ps.points desc \
+    ) \
+    where rownum<=3"
+    console.log(reqsend);
+    xhr.send(reqsend); 
+
+
+
+    });
+  };
+  getData(team)
+  .then(function(result){
+    return new Promise(function(resolve,reject){
+      var str="";
+      var xhr=new XMLHttpRequest();
     
     xhr.open("POST","http://localhost:5000",true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -135,23 +185,88 @@ function query_top3Assist(team){
     xhr.onreadystatechange=function(){
       if(xhr.readyState===4 ){
         //console.log(xhr.responseText);
-       	str=str+xhr.responseText;
-       	dbres=parseJson(str);
-       	console.log(dbres);
-
+        str=str+xhr.responseText;
+        dbres=parseJson(str);
+        for(var j=0;j<result.length;j++){
+          result[j]=result[j].concat(dbres[j]);
+        }
+        console.log(result);
+        resolve(result);
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
        
     }
     var reqsend="select * from (select p.PLAYER_NAME,ps.ast \
-	from players_statistic ps, players_team pt, players p \
-	where p.player_id=ps.player_id and pt.TEAM='"+team+"' and pt.player_id=p.player_id \
-	order by ps.points desc \
-	) \
-	where rownum<=3;"
+    from players_statistic ps, players_team pt, players p \
+    where p.player_id=ps.player_id and pt.TEAM='"+team+"' and pt.player_id=p.player_id \
+    order by ps.points desc \
+    ) \
+    where rownum<=3"
+    console.log(reqsend);
+    xhr.send(reqsend); 
+    });
+    
+  })
+  .then((result)=>{
+    var str="";
+    var xhr=new XMLHttpRequest();
+    
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+        str=str+xhr.responseText;
+        dbres=parseJson(str);
+        for(var j=0;j<result.length;j++){
+          result[j]=result[j].concat(dbres[j]);
+        }
+        console.log(result);
+        //document.getElementById("viewSection").innerHTML=xhr.responseText;
+        }
+       
+    }
+    var reqsend="select * from (select p.PLAYER_NAME,ps.trb \
+    from players_statistic ps, players_team pt, players p \
+    where p.player_id=ps.player_id and pt.TEAM='"+team+"' and pt.player_id=p.player_id \
+    order by ps.points desc \
+    ) \
+    where rownum<=3"
+    console.log(reqsend);
+    xhr.send(reqsend); 
+
+  })
+  .catch((error)=>console.log(error.message))
+}
+function query_top3Score(team,result){
+	var str="";
+	var xhr=new XMLHttpRequest();
+    
+    xhr.open("POST","http://localhost:5000",true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var dbres;
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4 ){
+        //console.log(xhr.responseText);
+       	str=str+xhr.responseText;
+       	dbres=parseJson(str);
+       	result.push(dbres);
+        return "THERETURN";
+        //document.getElementById("viewSection").innerHTML=xhr.responseText;
+        }
+       
+    }
+    var reqsend="select * from (select p.PLAYER_NAME,ps.points \
+    from players_statistic ps, players_team pt, players p \
+    where p.player_id=ps.player_id and pt.TEAM='"+team+"' and pt.player_id=p.player_id \
+    order by ps.points desc \
+    ) \
+    where rownum<=3"
     console.log(reqsend);
     xhr.send(reqsend); 
 }
+
 function query_teamInfo(team){
 	var str="";
 	var xhr=new XMLHttpRequest();
@@ -170,7 +285,7 @@ function query_teamInfo(team){
         }
        
     }
-    var reqsend="select coference, division, head_coach from coach where coach.team='"+team+";";
+    var reqsend="select conference, division, head_coach from coach where coach.team='"+team+"'";
     console.log(reqsend);
     xhr.send(reqsend); 
 }
@@ -193,7 +308,9 @@ function query_arena(team){
         }
        
     }
-    var reqsend="";
+    var reqsend="select stadium \
+    from team \
+    where team='"+team+"'";
     console.log(reqsend);
     xhr.send(reqsend); 
 }
@@ -237,10 +354,11 @@ function query_playerStat(player){
       if(xhr.readyState===4 ){
         //console.log(xhr.responseText);
        	str=str+xhr.responseText;
-       	dbres=parseMaxStat(str);
+       	dbres=parseJson(str);
        	dbres.shift();
+        console.log("PlayerStat");
         console.log(dbres);
-       	radarChart(dbres,"figure1f");
+       	//radarChart(dbres,"figure1f");
         }
        
     }
@@ -263,7 +381,8 @@ function query_player3Point(player){
       if(xhr.readyState===4 ){
         //console.log(xhr.responseText);
        	str=str+xhr.responseText;
-       	dbres=parseMaxStat(str);
+       	dbres=parseJson(str);
+        console.log("P3oint");
        	console.log(dbres);
 
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
@@ -271,8 +390,8 @@ function query_player3Point(player){
        
     }
     var reqsend="select ps.\"3P\",ps.\"3PA\",ps.\"3P%\" \
-	from players_statistic ps, players p \
-	where ps.player_id=p.player_id and p.player_name ='"+player+"'";
+    from players_statistic ps, players p \
+    where ps.player_id=p.player_id and p.player_name ='"+player+"'";
     console.log(reqsend);
     xhr.send(reqsend); 
 }
@@ -287,7 +406,8 @@ function query_playerInfo(player){
       if(xhr.readyState===4 ){
         //console.log(xhr.responseText);
        	str=str+xhr.responseText;
-       	dbres=parseMaxStat(str);
+       	dbres=parseJson(str);
+        console.log("PlayerInfo");
        	console.log(dbres);
 
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
