@@ -2,22 +2,6 @@ $(document).ready(function() {
 	$('.js-example-basic-single').select2();
 });
 
-//function openPlayerDescription(playerName){
-//	//teamName="spur";
-//	HTMLstring='<HTML>\n';
-//	HTMLstring+='<HEAD>\n';
-//	HTMLstring+='<TITLE>'+playerName+' Profile</TITLE>\n';
-//	HTMLstring+='<h2 class="centered">'+playerName+'</h2>';
-//	HTMLstring+='</HEAD>\n';
-//	HTMLstring+='<body>\n';
-//	HTMLstring+='</body>\n';
-//	HTMLstring+='</HTML>';
-//	newwindow=window.open();
-//	newdocument=newwindow.document;
-//	newdocument.write(HTMLstring);
-//	newdocument.close();
-//
-//}
 
 
 

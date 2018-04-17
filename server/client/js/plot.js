@@ -49,9 +49,11 @@ function radarChart(data, div_id){
 
 
     for(i=0; i<data.length; i++){
+        console.log(i);
         data[i] = (data[i] - stat_min)/(stat_max[i]-stat_min);
-    }
 
+    }
+    console.log("radar data!!!later"+data);
 
     data = [{
         type: 'scatterpolar',

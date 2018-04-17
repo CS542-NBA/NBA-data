@@ -358,7 +358,10 @@ function query_playerStat(player){
        	dbres.shift();
         console.log("PlayerStat");
         console.log(dbres);
-       	//radarChart(dbres,"figure1f");
+        $(document).ready(function() {
+            radarChart(dbres[0],"figure1table");
+        });
+
         }
        
     }
@@ -384,7 +387,16 @@ function query_player3Point(player){
        	dbres=parseJson(str);
         console.log("P3oint");
        	console.log(dbres);
+        $(document).ready(function() {
+              plotTable(dbres,"figure2table");
+        });
 
+          //$.each(dbres,function(i,item){
+        //  $('#myselect').append($('<option>',{
+        //      value:item.name,
+        //      text:item.name
+        //  }));
+        //});
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
        
@@ -393,7 +405,8 @@ function query_player3Point(player){
     from players_statistic ps, players p \
     where ps.player_id=p.player_id and p.player_name ='"+player+"'";
     console.log(reqsend);
-    xhr.send(reqsend); 
+    xhr.send(reqsend);
+    return dbres;
 }
 function query_playerInfo(player){
 	var str="";
@@ -409,6 +422,9 @@ function query_playerInfo(player){
        	dbres=parseJson(str);
         console.log("PlayerInfo");
        	console.log(dbres);
+          $(document).ready(function() {
+              plotTable(dbres,"figure3table");
+          });
 
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
