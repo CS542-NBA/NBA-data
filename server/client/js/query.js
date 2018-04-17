@@ -105,7 +105,9 @@ function query_PlayerInTeam(team){
        	str=str+xhr.responseText;
        	dbres=parseJson(str);
        	console.log(dbres);
-
+        $(document).ready(function() {
+            plotTable(dbres,"figure1f");
+        });
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
        
@@ -127,7 +129,9 @@ function query_teamwl(team){
         str=str+xhr.responseText;
         dbres=parseJson(str);
         console.log(dbres);
-
+        $(document).ready(function() {
+            pieChart_Nathan(dbres,"figure2f",dbres[0]);
+        });
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
        
@@ -223,6 +227,9 @@ function query_top3(team){
           result[j]=result[j].concat(dbres[j]);
         }
         console.log(result);
+        $(document).ready(function() {
+            plotTable(dbres,"figure5f");
+        });
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
        
@@ -280,7 +287,10 @@ function query_teamInfo(team){
        	str=str+xhr.responseText;
        	dbres=parseJson(str);
        	console.log(dbres);
-
+        
+        $(document).ready(function() {
+            plotTable(dbres,"figure3f");
+        });
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
        
@@ -302,8 +312,11 @@ function query_arena(team){
         //console.log(xhr.responseText);
        	str=str+xhr.responseText;
        	dbres=parseJson(str);
+        
        	console.log(dbres);
-
+        $(document).ready(function() {
+            plotTable(dbres,"figure4f");
+        });
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
        

@@ -41,6 +41,23 @@ function pieChart(data, div_id, labels) {
 
     return  Plotly.newPlot(div_id, data, layout);
 }
+function pieChart_Nathan(data, div_id, labels) {
+
+    var data= [
+        {
+            values: data[1],
+            labels: labels,
+            type: 'pie'
+        }
+    ];
+
+    var layout = {
+        height: 500,
+        width: 600
+    };
+
+    return  Plotly.newPlot(div_id, data, layout);
+}
 
 
 function radarChart(data, div_id){
