@@ -1,7 +1,7 @@
 // data=[['player1', 'player2', 'player3'], [30, 28, 27]]
 // color = '(58, 200, 225, 0.5)'
 
-function barPlot(data, div_id, color='(58, 200, 225, 0.5)') {
+function barPlot(data, div_id, color) {
     var y_axis = data[1]
     var col = 'rgba'+ color
     var ymin = Math.min(...y_axis);
