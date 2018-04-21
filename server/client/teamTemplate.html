@@ -37,8 +37,8 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-          	<li><a id="name" href="#teamName" class="smoothScroll"></a></li>
-            <li><a href="#teamPlayers" class="smoothScroll">Team Players</a></li>
+          	<!--<li><a id="name" href="#teamName" class="smoothScroll">TESTTT</a></li>-->
+            <li><a href="#teamPlayers" id="nameTitle" class="smoothScroll">TTTT</a></li>
 			<li> <a href="#figure1" class="smoothScroll">W/L Ratio</a></li>
 			<li> <a href="#figure2" class="smoothScroll">Team Info</a></li>
 			<li> <a href="#figure3" class="smoothScroll">Arena</a></li>
@@ -139,6 +139,7 @@
     	$(document).ready(
 			function(){
 				var teamName=getURLParameter('teamName');
+				document.getElementById("nameTitle").innerHTML=teamName+' Players';
     			var srcpath='./teamDescription/'+teamName+'.png';
     			document.getElementById('teamimage').src=srcpath;
     			query_PlayerInTeam(teamName);
