@@ -228,7 +228,7 @@ function query_top3(team){
         }
         console.log(result);
         $(document).ready(function() {
-            plotTable(result,"figure5f");
+            plotTable(result,"figure5f",350);
         });
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
@@ -289,7 +289,7 @@ function query_teamInfo(team){
        	console.log(dbres);
         
         $(document).ready(function() {
-            plotTable(dbres,"figure3f");
+            plotTable(dbres,"figure3f",250);
         });
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
@@ -315,7 +315,7 @@ function query_arena(team){
         
        	console.log(dbres);
         $(document).ready(function() {
-            plotTable(dbres,"figure4f");
+            plotTable(dbres,"figure4f",250);
         });
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
@@ -401,7 +401,7 @@ function query_player3Point(player){
         console.log("P3oint");
        	console.log(dbres);
         $(document).ready(function() {
-              plotTable(dbres,"figure2table");
+              plotTable(dbres,"figure2table",250);
         });
 
           //$.each(dbres,function(i,item){
@@ -436,7 +436,7 @@ function query_playerInfo(player){
         console.log("PlayerInfo");
        	console.log(dbres);
           $(document).ready(function() {
-              plotTable(dbres,"figure3table");
+              plotTable(dbres,"figure3table",250);
           });
 
         //document.getElementById("viewSection").innerHTML=xhr.responseText;

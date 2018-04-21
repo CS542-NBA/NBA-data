@@ -125,7 +125,7 @@ function transpose(a) {
     return t;
 }
 
-function plotTable(data, div_id){
+function plotTable(data, div_id,setheight){
     
     var header = data[0]
     var header_value = []
@@ -154,8 +154,11 @@ function plotTable(data, div_id){
         }
     }]
     console.log(data);
+    var layout={
+        height:setheight
+    }
     
-    return Plotly.plot(div_id, data)
+    return Plotly.plot(div_id, data,layout)
 
 
 
