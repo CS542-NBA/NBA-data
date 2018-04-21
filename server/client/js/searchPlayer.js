@@ -8,4 +8,6 @@ var playername = getURLParameter('playerName');
 
 console.log(playername);
 var test = document.getElementById("name");
+var nn = document.getElementById("namedisplay");
 test.innerHTML = playername;
+nn.innerHTML = playername;
