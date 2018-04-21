@@ -126,12 +126,13 @@ function transpose(a) {
 }
 
 function plotTable(data, div_id){
+    
     var header = data[0]
     var header_value = []
     for(i=0; i<header.length; i++){
         header_value.push([header[i]])
     }
-
+    
     data.shift()
     var values = transpose(data)
     var data = [{
@@ -152,7 +153,8 @@ function plotTable(data, div_id){
             font: {family: "Arial", size: 12, color: ["#506784"]}
         }
     }]
-
+    console.log(data);
+    
     return Plotly.plot(div_id, data)
 
 

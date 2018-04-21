@@ -194,7 +194,7 @@ function query_top3(team){
         for(var j=0;j<result.length;j++){
           result[j]=result[j].concat(dbres[j]);
         }
-        console.log(result);
+        //console.log(result);
         resolve(result);
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
@@ -228,7 +228,7 @@ function query_top3(team){
         }
         console.log(result);
         $(document).ready(function() {
-            plotTable(dbres,"figure5f");
+            plotTable(result,"figure5f");
         });
         //document.getElementById("viewSection").innerHTML=xhr.responseText;
         }
