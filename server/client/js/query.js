@@ -203,7 +203,7 @@ function query_top3(team){
     var reqsend="select * from (select p.PLAYER_NAME,ps.ast \
     from players_statistic ps, players_team pt, players p \
     where p.player_id=ps.player_id and pt.TEAM='"+team+"' and pt.player_id=p.player_id \
-    order by ps.points desc \
+    order by ps.ast desc \
     ) \
     where rownum<=3"
     console.log(reqsend);
@@ -237,7 +237,7 @@ function query_top3(team){
     var reqsend="select * from (select p.PLAYER_NAME,ps.trb \
     from players_statistic ps, players_team pt, players p \
     where p.player_id=ps.player_id and pt.TEAM='"+team+"' and pt.player_id=p.player_id \
-    order by ps.points desc \
+    order by ps.trb desc \
     ) \
     where rownum<=3"
     console.log(reqsend);
